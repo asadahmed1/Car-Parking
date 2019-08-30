@@ -1,11 +1,11 @@
-var express = require('express');
-router = express.Router()
-const carparkingUser_controller = require('../controllers/carparkingUser_controller')
-const carparkingBooked_controller = require('../controllers/carparkingBooked_controller')
+const express = require('express');
+var routes = express.Router()
+var carparkingUser_controller = require('../controllers/carparkingUser_controller')
+var carparkingBooked_controller = require('../controllers/carparkingBooked_controller')
 
-router.post('/usersave',carparkingUser_controller.carparkingUse_save)
-router.get('/booked',carparkingBooked_controller.carparkingBooked)
+routes.post('/usersave',carparkingUser_controller.carparkingSave)
+routes.get('/booked',carparkingBooked_controller.carparkingBooked)
+routes.post('/login',carparkingUser_controller.carparkingUser_login)
 
 
-
-module.exports =router
+module.exports = routes

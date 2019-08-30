@@ -1,4 +1,6 @@
 var mongoose = require('mongoose')
+var bcrypt = require('bcrypt-node')
+SALT_WORK_FACTOR=10
 const carparkingUserschema = mongoose.Schema({
     name:{
         type:String,
@@ -21,5 +23,34 @@ const carparkingUserschema = mongoose.Schema({
     }
 })
 
+carparkingUserschema.pre("save", function(next){
+    // call all schema properties 
+    var carParkUserData = this;
+
+    if(!carParkUserData.isModified('password')) return next();
+    //generate salt here
+    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt){
+        if(err)
+        return next(err);
+        // hash the new password using our salt
+        bcrypt.hash(carParkUserData.password, salt, null, function(err, hash){
+            if(err)
+            return next(err);
+            //set the hashed password on our user document
+            carParkUserData.password = hash;
+            next();
+        });
+    });
+});
+
+// compare password 
+ 
+
+carparkingUserschema.methods.comparePassword = function(candidatePassword, cb) {
+    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+     if (err) return cb(err);
+     cb(null, isMatch);
+    });
+}
 
 module.exports = mongoose.model('carparkingUserschema',carparkingUserschema)

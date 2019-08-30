@@ -1,5 +1,5 @@
 const carparkingBooked_model = require('../models/carparkingBooked_model')
-const carparkingUser_controller = require('../models/carparkingUser_model')
+// const carparkingUser_controller = require('../models/carparkingUser_model')
 
 const carparkingBooked= (req,res)=>{
   
