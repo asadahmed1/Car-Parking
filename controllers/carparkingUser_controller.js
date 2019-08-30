@@ -1,5 +1,6 @@
 const carparkingUsermodel = require('../models/carparkingUser_model')
 var bcrypt = require('bcrypt-node')
+var jwt = require('jsonwebtoken')
 
 
 const carparkingSave = (req,res,next)=>{
@@ -56,9 +57,9 @@ const carparkingSave = (req,res,next)=>{
     // })
 
     // fetch user and test password verification
-    const carparkingUser_login = (req, res, next) => {
+  const  carparkingUser_login = (req, res, next) => {
         // fetch user and test password verification
-        carparkingUser_model.findOne({ email: req.body.email }, function(err, user) {
+        carparkingUsermodel.findOne({ email: req.body.email }, function(err, user) {
             if(err){
                 res.status(500).json({
                     message: "error",
@@ -87,22 +88,7 @@ const carparkingSave = (req,res,next)=>{
                         res.send("Invalid Password. Please try again");
                     }
                     
-                    // if(err){
-                    // 	res.status(500).json({
-                    // 		message: "error",
-                    // 		err
-                    // 	})
-                    // }else{
-                    //     if(!isMatch){
-                    //         res.send("Invalid Password. Please try again");
-                    //     }
-                    //     else{
-                    //         res.status(200).json({
-                    //             message: "Login Successfully",
-                    //             isMatch
-                    //         })
-                    //     }
-                    // }
+                    
                     
                 });
              
@@ -111,7 +97,8 @@ const carparkingSave = (req,res,next)=>{
     
             
         });
-    };
+    }
+    
 module.exports =  {
     carparkingSave,
     carparkingUser_login

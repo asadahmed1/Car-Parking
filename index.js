@@ -33,7 +33,8 @@ mongoose.connection.on('error',(err)=>{
     }
 })
 //here we will use verifyToken function of jwt 
-app.use('/api', verifyToken, routes)
+app.use('/api', routes)
+app.use('/lo', verifyToken, routes)
  
 
 //Verify Token 
