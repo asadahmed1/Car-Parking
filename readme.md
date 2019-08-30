@@ -20,3 +20,16 @@ localhost:5000/api/usersave
 	"arrivalDate" : "29/08/2019"
 }
 
+###for login
+localhost:5000/api/login
+
+### data
+
+{
+
+		"email":"asadahmed@gmail.com",
+	"password":"skdjfjdhjbfjk"
+
+
+}
+
